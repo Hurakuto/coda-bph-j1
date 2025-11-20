@@ -52,6 +52,7 @@ function computeAverage(array $grades) : float
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" href="style.css">
         <title>Bulletin de notes</title>
     </head>
     <body>
@@ -63,9 +64,19 @@ function computeAverage(array $grades) : float
         </h2>
         <ul id="students">
             <li>
-                <article class="">
+                <?php foreach($students as $key => $student){ ?>
+
+                    <?php if(computeAverage($student['grades'])<10){?>
+                <article class="red">
+
+                    <?php }else if(computeAverage($student['grades'])<=13){ ?>
+                <article class="orange">
+
+                    <?php }else{ ?>
+                <article class="green">
+                    <?php } ?>
+                
                     <header>
-                        <?php foreach($students as $key => $student){ ?>
                         <h1><?= $student['lastName'].' '.$student['firstName'] ?></h1>
                     </header>
                     <section>
@@ -77,10 +88,11 @@ function computeAverage(array $grades) : float
                         </ul>
                     </section>
                     <footer>
+                        <h3>Moyenne des notes de l'étudiant </h3>
                         <h3><?= computeAverage($student['grades']) ?></h3>
                     </footer>
-                        <?php }?>
                 </article>
+                <?php } ?>
             </li>
         </ul>
     </body>
